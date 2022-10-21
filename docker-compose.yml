@@ -1,0 +1,24 @@
+version: "3.4"
+
+networks:
+  default:
+
+services:
+  api:
+    container_name: tender-api
+    build:
+      context: .
+      dockerfile: deployment/server/Dockerfile
+      target: dev
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+        RUN_LEVEL: dev
+        PYTHON_VERSION: "3.9"
+    volumes:
+      - .:/opt/app
+    ports:
+      - "5001:5000"
+    restart: unless-stopped
+    env_file:
+      - .env.local
