@@ -2,6 +2,7 @@ from functools import partial
 from typing import Dict
 
 from loguru import logger
+from starlette.middleware.cors import CORSMiddleware
 
 from api import make_app
 from base_schemas import OkResponse
@@ -24,6 +25,16 @@ if not DEBUG:
         keep_loggers=["uvicorn.access"],
         suppress_loggers=["uvicorn", "uvicorn.error", "fastapi"],
     )
+else:
+    origins = ["*"]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 @app.get("/healthz", tags=["health check"], response_model=OkResponse)
@@ -33,4 +44,3 @@ async def root() -> Dict[str, bool]:
 
 
 include_router(search_api)
-
