@@ -27,6 +27,7 @@ websockets = "^10.3"
 elasticsearch = {extras = ["async"], version = "^8.4.3"}
 aioredis = {extras = ["hiredis"], version = "^2.0.1"}
 arq = "^0.24.0"
+sentence-transformers = "2.2.2"
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.7"
