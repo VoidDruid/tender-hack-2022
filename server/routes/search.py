@@ -26,7 +26,7 @@ async def autocomplete(websocket: WebSocket):
             response_obj = get_autocomplete_options(query)
             await websocket.send_json(response_obj)
         except starlette.websockets.WebSocketDisconnect:
-            ...
+            break
 
 
 def db_query(query: str) -> dict: ...
