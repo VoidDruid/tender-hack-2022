@@ -53,4 +53,4 @@ ENV PYTHONPATH=$PYTHONPATH:/opt/app/server
 
 EXPOSE 8000
 
-CMD ["uvicorn", "--reload", "--host", "0.0.0.0", "--port", "5000", "server.main:app"]
+CMD ["uvicorn", "--reload", "--reload-exclude", ".docker_data", "--host", "0.0.0.0", "--port", "8888", "server.main:app"]
