@@ -25,9 +25,17 @@ services:
 
   elastic:
     container_name: tender-elastic
-    image: elasticsearch:8.4.3
+    image: elasticsearch:7.17.6
     environment:
       - discovery.type=single-node
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=qwerfvcxzasd
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -35,6 +43,16 @@ services:
       - default
     volumes:
       - ./.docker_data/elastic:/usr/share/elasticsearch/data
+    env_file:
+      - .env.local
+
+  elastic-hq:
+    container_name: tender-elastic-hq
+    image: elastichq/elasticsearch-hq:latest
+    ports:
+    - "9100:5000"
+    networks:
+      - default
 
   redis:
     container_name: tender-redis

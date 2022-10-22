@@ -1,6 +1,6 @@
 import os
 
-from pydantic import BaseSettings
+from pydantic import BaseSettings, AnyHttpUrl
 
 APP_NAME = "tender-api"
 APP_VERSION = "0.1.0"
@@ -22,4 +22,12 @@ class ServerSettings(BaseSettings):
         env_prefix = "server_"
 
 
+class ElasticSettings(BaseSettings):
+    URI: AnyHttpUrl
+
+    class Config(ToolConfig):
+        env_prefix = "elastic_"
+
+
 server_settings = ServerSettings()
+elastic_settings = ElasticSettings()
