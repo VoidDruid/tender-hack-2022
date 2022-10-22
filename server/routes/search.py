@@ -20,13 +20,13 @@ def get_autocomplete_options(query: str) -> List[str]:
 @api.websocket("/autocomplete")
 async def autocomplete(websocket: WebSocket):
     await websocket.accept()
-    while True:
-        try:
+    try:
+        while True:
             query: str = await websocket.receive_text()
             response_obj = get_autocomplete_options(query)
             await websocket.send_json(response_obj)
-        except starlette.websockets.WebSocketDisconnect:
-            break
+    except starlette.websockets.WebSocketDisconnect:
+        ...
 
 
 def db_query(query: str) -> dict: ...
