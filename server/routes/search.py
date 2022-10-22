@@ -1,11 +1,9 @@
-import json
 from typing import List, Any
-
 import starlette.websockets
-
+from .search_schemas import SearchFilters
 from api import Api
 from fastapi import WebSocket
-from fastapi.responses import HTMLResponse
+
 
 api: Api = Api(
     prefix='/search',
@@ -32,7 +30,7 @@ async def autocomplete(websocket: WebSocket):
 def db_query(query: str) -> dict: ...
 
 
-@api.get('/')
+@api.get('/', response_model=SearchFilters)
 async def search(query: str):
     obj = db_query(query)
     return obj
