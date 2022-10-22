@@ -23,26 +23,26 @@ services:
     env_file:
       - .env.local
 
-  elastic:
-    container_name: tender-elastic
-    image: elasticsearch:8.4.3
-    environment:
-      - discovery.type=single-node
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    networks:
-      - default
-    volumes:
-      - ./.docker_data/elastic:/usr/share/elasticsearch/data
-
-  redis:
-    container_name: tender-redis
-    image: library/redis:6
-    command: redis-server --appendonly yes
-    ports:
-      - "6379:6379"
-    networks:
-      - default
-    volumes:
-    - ./.docker_data/redis:/var/lib/redis
+#  elastic:
+#    container_name: tender-elastic
+#    image: elasticsearch:8.4.3
+#    environment:
+#      - discovery.type=single-node
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    networks:
+#      - default
+#    volumes:
+#      - ./.docker_data/elastic:/usr/share/elasticsearch/data
+#
+#  redis:
+#    container_name: tender-redis
+#    image: library/redis:6
+#    command: redis-server --appendonly yes
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - default
+#    volumes:
+#    - ./.docker_data/redis:/var/lib/redis

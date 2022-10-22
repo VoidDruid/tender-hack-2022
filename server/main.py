@@ -8,6 +8,8 @@ from base_schemas import OkResponse
 from common.logger import init_logger
 from settings import server_settings, DEBUG, LOG_LEVEL, LOG_FORMAT
 
+from routes import search_api
+
 logger.info(f"Running with config: {server_settings.dict()}")
 
 app = make_app()
@@ -28,3 +30,7 @@ if not DEBUG:
 async def root() -> Dict[str, bool]:
     """Health check endpoint"""
     return {"ok": True}
+
+
+include_router(search_api)
+
