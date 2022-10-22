@@ -239,6 +239,14 @@ async = ["aiohttp (>=3,<4)"]
 requests = ["requests (>=2.4.0,<3.0.0)"]
 
 [[package]]
+name = "faiss-cpu"
+version = "1.7.2"
+description = "A library for efficient similarity search and clustering of dense vectors."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "fastapi"
 version = "0.85.1"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -982,7 +990,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "5cfdd96ea565dab5d73eac4f2be368b08d5de0614d9ccd96f1a7733964fbde30"
+content-hash = "51fde96f93676f620ea5f8a320fdcd25e4755a144e07d44dc4f057f5d172f4cc"
 
 [metadata.files]
 aiohttp = []
@@ -1003,6 +1011,7 @@ colorama = []
 deprecated = []
 elastic-transport = []
 elasticsearch = []
+faiss-cpu = []
 fastapi = []
 filelock = []
 frozenlist = []
