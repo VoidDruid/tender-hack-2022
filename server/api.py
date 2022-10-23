@@ -85,10 +85,6 @@ def set_middlewares(app: FastAPI) -> None:
     ) -> ORJSONResponse:
         try:
             return await call_next(request)
-        except DuplicateKeyError as exc:
-            msg = f"Object with <{exc.details['keyValue']}> already exists"
-            logger.error(msg)
-            return DuplicateError({"duplicate": exc.details["keyValue"], "desc": msg}).render()
         except Exception as exc:  # pylint: disable=broad-except
             logger.exception("Uncaught exception while processing request")
             return InternalError(str(exc)).render()
