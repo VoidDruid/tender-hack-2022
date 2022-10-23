@@ -30,6 +30,10 @@ aioredis = {extras = ["hiredis"], version = "^2.0.1"}
 arq = "^0.24.0"
 sentence-transformers = "2.2.2"
 faiss-cpu = "^1.7.2"
+SQLAlchemy = {extras = ["asyncio"], version = "^1.4.32"}
+alembic = "^1.7.7"
+asyncpg = "^0.25.0"  # main app
+psycopg2-binary = "^2.9.3"  # alembic
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.7"
