@@ -1,2 +1,6 @@
 *.xlsx*
 *.txt
+*.pickle
+*.zip
+*.json
+*.npy

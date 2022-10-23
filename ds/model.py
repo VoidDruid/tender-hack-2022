@@ -1,9 +1,10 @@
 from sentence_transformers import SentenceTransformer, util
-mat_model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v1') 
+
+mat_model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v1')
 
 
-def create_embedding(query): 
-    query= str(query)
+def create_embedding(query):
+    query = str(query)
     result = mat_model.encode(query)
     return result
 

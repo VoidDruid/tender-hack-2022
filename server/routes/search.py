@@ -1,8 +1,11 @@
 from typing import List, Any
 import starlette.websockets
-from .search_schemas import SearchFilters
+from .search_schemas import SearchFilters, Filter
 from api import Api
 from fastapi import WebSocket
+from elasticsearch_dsl import Search
+from pydantic import BaseModel
+from database.elastic import es
 
 
 api: Api = Api(
@@ -27,10 +30,22 @@ async def autocomplete(websocket: WebSocket):
         ...
 
 
-def db_query(query: str) -> dict: ...
+class SearchResponse(BaseModel):
+    filters: list[Filter] = []
+    response: list[str] = []
 
 
-@api.get('/', response_model=SearchFilters)
+def db_query(query: str) -> SearchResponse:
+    s = Search(using=es, index="product") \
+        .query("query_string", query=query, default_field="name")
+    response = s.execute()
+    responses = [hit.name for hit in response]
+    return SearchResponse(
+        response=responses
+    )
+
+
+@api.get('/', response_model=SearchResponse)
 async def search(query: str):
     obj = db_query(query)
     return obj

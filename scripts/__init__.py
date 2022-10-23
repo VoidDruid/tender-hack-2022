@@ -3,6 +3,7 @@ from typing import List, Union
 
 if "RUN_LEVEL" in os.environ:
     import settings
+
     CURRENT_LEVEL = settings.RUN_LEVEL
 else:
     CURRENT_LEVEL = "dev"

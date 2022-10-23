@@ -1,1 +1,1 @@
-curl -X DELETE "http://elastic:qwerfvcxzasd@localhost:9200/product?pretty"
+curl -X DELETE "http://elastic:qwerfvcxzasd@elastic:9200/product?pretty"

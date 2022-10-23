@@ -7,14 +7,24 @@ PYTHONPATH = PYTHONPATH=./:$(CODE_DIR)
 # Executables
 PYTHON = $(PYTHONPATH) python3
 POETRY = $(PYTHONPATH) poetry run
+ALEMBIC = $(PYTHONPATH) alembic -c $(CODE_DIR)/database/postgres/alembic.ini
 
-.PHONY: run-script migrations pretty help lint validate
+# Params
+DOWNGRADE_DEFAULT = -1
+
+.PHONY: run-script migrations db_upgrade db_downgrade pretty help lint validate
 
 run-script:  ## Запустить скрипты
 	${PYTHON} -m scripts
 
 migrations:  ## Создать миграции
 	$(ALEMBIC) revision --autogenerate -m "$(message)"
+
+db_upgrade:  ## Запуск миграций
+	$(ALEMBIC) upgrade head
+
+db_downgrade:  ## Откат до предыдущей (по умолчанию) миграции
+	$(ALEMBIC) downgrade $(DOWNGRADE_DEFAULT)
 
 pretty:  ## "Причесать" код - isort, black, пр.
 	isort .

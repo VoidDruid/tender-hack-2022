@@ -1,6 +1,6 @@
 import os
 
-from pydantic import BaseSettings, AnyHttpUrl
+from pydantic import AnyHttpUrl, BaseSettings
 
 APP_NAME = "tender-api"
 APP_VERSION = "0.1.0"
@@ -29,5 +29,16 @@ class ElasticSettings(BaseSettings):
         env_prefix = "elastic_"
 
 
+class PostgresSettings(BaseSettings):
+    URI: str
+    ALEMBIC_URI: str
+    MAX_OVERFLOW: int = 15
+    POOL_SIZE: int = 15
+
+    class Config(ToolConfig):
+        env_prefix = "postgres_"
+
+
+postgres_settings = PostgresSettings()
 server_settings = ServerSettings()
 elastic_settings = ElasticSettings()

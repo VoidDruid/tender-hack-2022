@@ -1,15 +1,14 @@
 from functools import partial
 from typing import Dict
 
-from loguru import logger
-from starlette.middleware.cors import CORSMiddleware
-
 from api import make_app
 from base_schemas import OkResponse
-from common.logger import init_logger
-from settings import server_settings, DEBUG, LOG_LEVEL, LOG_FORMAT
-
+from loguru import logger
 from routes import search_api
+from starlette.middleware.cors import CORSMiddleware
+
+from common.logger import init_logger
+from settings import DEBUG, LOG_FORMAT, LOG_LEVEL, server_settings
 
 logger.info(f"Running with config: {server_settings.dict()}")
 
